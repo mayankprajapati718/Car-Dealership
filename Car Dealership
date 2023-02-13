@@ -1,0 +1,251 @@
+import javax.annotation.processing.Filer;
+import java.io.*;
+import java.util.HashMap;
+import java.util.Scanner;
+
+interface CarInventory {
+    int availableQuantity();
+
+    void monthlySales();
+
+    int getProfit();
+
+    int defectedQuantity();
+}
+public class Ford {static{
+        System.out.println("Welcome To Ford Dealership!!!");}
+        String engineType(){return "4 Stroke";}
+      String getsteeringSide(){return "Right side";}
+    public static void main(String[] args) {
+        System.out.println("Please tell us which identity belongs to you [TYPE Manager/Customer/Salesman ]");
+            Scanner s=new Scanner(System.in);
+            String name=s.next();String manager="Manager";String salesman="Salesman";String customer="Customer";
+            if(name.equals(manager)){
+        System.out.println("Please enter model which you want to know the details\n (be careful while typing because it is case sensitive: Fiesta/Ecosports/Mustang)");
+        Scanner sc=new Scanner(System.in);
+        String car=sc.next();
+        String model1="Fiesta";
+        String model2="Ecosports";String model3="Mustang";
+
+if(car.equals(model1)) {
+    Fiesta fe = new Fiesta();
+    System.out.println("you choose Fiesta to know its specification ");
+    System.out.println("Engine Type : " + fe.engineType());
+    System.out.println("Available in stock: "+fe.availableQuantity());
+    fe.monthlySales();
+    System.out.println("Defected model: "+fe.defectedQuantity());
+    System.out.println("Profit per car: "+fe.getProfit());
+    System.out.println("Responsible Person: "+fe.salesMan);
+}
+else if(car.equals(model2)) {
+            System.out.println("you choose Ecosports to know its specification ");
+            Ecosport e = new Ecosport();
+            System.out.println("Engine Type : " +e.engineType());
+            System.out.println("Engine Type : " +e.availableQuantity());
+            e.monthlySales();
+            System.out.println("Available in stock: "+e.defectedQuantity());
+            System.out.println("Profit per car: "+e.getProfit());
+            System.out.println("Responsible saleperon: "+e.salesman);
+        }
+else if(car.equals(model3)){System.out.println("you choose Mustang to know its specification ");
+        Mustang ca=new Mustang();
+        System.out.println("Engine Type : " +ca.engineType());
+        System.out.println(ca.getsteeringSide());
+        System.out.println("Engine Type : " +ca.availableQuantity());
+        ca.monthlySales();
+        System.out.println("Available in stock: "+ca.defectedQuantity());
+        System.out.println("Profit per car"+ca.getProfit());
+    System.out.println("Responsible saleperon: "+ca.salesman);
+    }
+else {
+    System.out.println("Wrong type");
+}
+} if(name.equals(salesman)){Salesman sal=new Salesman();
+                System.out.println("Choose CustomerList/complaint/generatebill/costupdate/advertise/CheckFeedback");
+        String l=s.next();String list="CustomerList";String si="complaint";String back="generatebill";String f="costupdate";String Y="advertise";
+        String o="CheckFeedback";
+        if(l.equals(list))
+        {sal.getCustomerList();
+        }if(l.equals(si))
+            {sal.complaint();
+            }if(l.equals(back))
+            {sal.generatebill();
+            }if(l.equals(f))
+            {sal.costupdate();
+            }if(l.equals(Y))
+            {sal.advertise();
+            }else if(l.equals(o))
+            {sal.readfeedback();
+            }
+            }
+             else if(name.equals(customer)){
+                Customer c=new Customer();
+                System.out.println("choose: BUY/SELL/FEEDBACK");
+                String j=s.next();String buy="BUY";String sell="SELL";String feedback="FEEDBACK";
+
+if(j.equals(buy))
+{c.buy();
+            }
+if(j.equals(sell)){
+    c.sell();
+}
+else if(j.equals(feedback)){
+    c.feedback();
+}
+            } else{
+                System.out.println("Invalid Entry!!!");
+            }
+    }}
+class Mustang extends Ford implements CarInventory {
+
+    @Override
+    String getsteeringSide() {
+        return "LeftSide";
+    }
+
+    @Override
+    String engineType() {
+        return "v8 Engine";
+    }
+
+    String salesman="Virat";
+    int CostPrice=9898900;
+    int SellPrice=7485990;
+    @Override
+    public int availableQuantity() {
+        return 123;
+    }
+
+    @Override
+    public void monthlySales() {
+        HashMap<String,Integer>listm=new HashMap<>();
+        listm.put("January",2);
+        listm.put("Feburary",0);
+        listm.put("March",1);
+        System.out.println("Monthly sales List: "+listm);
+    }
+
+    @Override
+    public int getProfit() {
+        return SellPrice-CostPrice;
+    }
+
+    @Override
+    public int defectedQuantity() {
+        return 8;
+    }
+}
+class Ecosport extends Ford implements CarInventory{
+    static{String manager="Ramesh";
+        System.out.println("Manager,Ford Dealership  "+manager);}
+
+    String salesman="Anil";
+    int CostPrice=989800;
+    int SellPrice=17485990;
+    @Override
+    public int availableQuantity() {
+        return 0;
+    }
+
+    @Override
+    public void monthlySales() {
+        HashMap<String,Integer>listF=new HashMap<>();
+        listF.put("January",5);
+        listF.put("Feburary",2);
+        listF.put("March",9);
+        System.out.println("Monthly sales List: "+listF);
+    }
+
+    @Override
+    public int getProfit() {
+        return SellPrice-CostPrice;
+    }
+
+    @Override
+    public int defectedQuantity() {
+        return 0;
+    }
+}
+class Fiesta extends Ford implements CarInventory{
+    static{String manager="Ramesh";
+        System.out.println("Manager,Ford Dealership  "+manager);}
+    String salesMan="Rohit";
+    int CostPrice=9898000;
+    int SellPrice=17485990;
+    @Override
+    public int availableQuantity() {
+        return 6;
+    }
+
+    @Override
+    public void monthlySales() {
+        HashMap<String,Integer>listF=new HashMap<>();
+        listF.put("January",5);
+        listF.put("Feburary",2);
+        listF.put("March",9);
+        System.out.println("Monthly sales List: "+listF);
+    }
+
+    @Override
+    public int getProfit() {
+        return SellPrice-CostPrice;
+    }
+
+    @Override
+    public int defectedQuantity() {
+        return 5;
+    }}
+class Salesman implements Serializable{
+    public void getCustomerList(){
+        HashMap<String,String>h=new HashMap<>();
+        h.put("RAHUL","948736389");
+        h.put("LAXMI","364858856");
+        h.put("RAMAN","638495094");
+        h.put("yash","3748599669");
+        System.out.println(h);}
+    public String complaint(){
+        return "your product is having problem";
+    }
+    public String generatebill(){
+        return "generatebill";
+    }
+    public String advertise(){
+        return"advertise";
+    }
+    public int costupdate(){
+        System.out.println("type add cost to price");Scanner e=new Scanner(System.in);
+        int cost=e.nextInt();
+        return cost;
+    }
+
+    public void readfeedback() {
+        try{
+            ObjectInputStream is=new ObjectInputStream(new FileInputStream("myfile.txt"));
+            String y=(String)is.readObject();
+            System.out.println(y);
+            is.close();
+
+        }catch (Exception e){e.printStackTrace();
+    }}
+}class Customer implements Serializable{
+    public void buy(){
+        System.out.println("which model of Ford-> Fiesta,Ford,Mustang?");
+    } public void sell(){
+        System.out.println("tell something about your distance covered (in km) by your car?");
+        Scanner c=new Scanner(System.in);
+        double d=c.nextDouble();
+        System.out.println("type car model");
+        String k=c.nextLine();}
+public void feedback(){
+    System.out.println("please give your feedbak!!");Scanner c=new Scanner(System.in);
+    String v=c.nextLine();try{
+        ObjectOutputStream is=new ObjectOutputStream((new FileOutputStream("myfile.txt")));
+        is.writeObject(v);
+        is.close();
+    }catch (Exception E){
+        System.out.println("not saved");
+    }
+    System.out.println("Thanks have a nice day!!");
+
+        }
+    }
